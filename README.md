@@ -1,31 +1,5 @@
 
-
-Ran tool
-看起来这是一个RPC (远程过程调用) 项目，让我探索核心组件来创建运行流程图。
-
-Ran tool
-
-Ran tool
-
-Search files...
-
-Search files...
-
-Ran tool
-
-Ran tool
-
-Read file: consumer/src/main/java/com/kz/example/consumer/EasyConsumerExample.java
-
-Ran tool
-
-Read file: provider/src/main/java/com/kz/example/provider/UserServiceImpl.java
-
-```bash
-echo "Creating kzRPC workflow diagram..."
-```
-根据项目代码分析，这是一个简单的RPC框架实现，下面是运行流程图：
-
+下面是运行流程图：
 ```
 ┌─────────────────┐                                             ┌─────────────────┐
 │     消费者      │                                             │     提供者      │
