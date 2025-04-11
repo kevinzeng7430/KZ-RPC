@@ -22,6 +22,7 @@ public class JdkSerializer implements Serializer{
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T> T deserialize(byte[] data, Class<T> clazz) throws IOException {
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(data);
         ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);

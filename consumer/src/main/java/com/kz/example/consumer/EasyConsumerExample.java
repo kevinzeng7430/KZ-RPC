@@ -9,13 +9,14 @@ public class EasyConsumerExample {
         //  todo 消费服务
         // 1. 获取服务
         //UserService userService = new UserServiceProxy(); // 通过注册中心获取服务
-        // 动态代理
+        // 创建代理
         UserService userService = ServiceProxyFactory.getProxy(UserService.class);
         User user = new User();
         user.setName("kz");
-        // 2. 调用服务
+        // 2. 调用代理对象的方法调用服务
         User newUser = userService.getUser(user);
         if(newUser != null) {
+            // TODO 看看返回的newUser内容
             System.out.println("Consumer: " + newUser.getName());
         } else {
             System.out.println("Consumer: null");
