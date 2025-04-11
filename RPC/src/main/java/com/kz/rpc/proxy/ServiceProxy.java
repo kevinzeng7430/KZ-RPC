@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
 
 public class ServiceProxy implements InvocationHandler {
     @Override
+    // TODO 看看这个method是什么
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
         // 指定序列化器
