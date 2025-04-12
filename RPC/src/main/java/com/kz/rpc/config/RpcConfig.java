@@ -24,5 +24,9 @@ public class RpcConfig {
      * 服务主机
      */
     private String serverHost = "localhost";
+    /**
+     * 模拟调用
+     */
+    private boolean mock = false;
 
 }

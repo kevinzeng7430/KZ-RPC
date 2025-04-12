@@ -41,6 +41,7 @@ public class RpcApplication {
      * @return
      */
     public static RpcConfig getRpcConfig() {
+        // 双检锁单例模式
         if (rpcConfig == null) {
             synchronized (RpcApplication.class) {
                 if (rpcConfig == null) {

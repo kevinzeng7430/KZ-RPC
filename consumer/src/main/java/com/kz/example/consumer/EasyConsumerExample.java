@@ -16,7 +16,6 @@ public class EasyConsumerExample {
         // 2. 调用代理对象的方法调用服务
         User newUser = userService.getUser(user);
         if(newUser != null) {
-            // TODO 看看返回的newUser内容
             System.out.println("Consumer: " + newUser.getName());
         } else {
             System.out.println("Consumer: null");
