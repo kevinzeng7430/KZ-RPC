@@ -1,10 +1,12 @@
 package com.kz.rpc.server.serverImpl;
 
+import com.kz.rpc.RpcApplication;
 import com.kz.rpc.model.RpcRequest;
 import com.kz.rpc.model.RpcResponse;
 import com.kz.rpc.registry.LocalRegistry;
 import com.kz.rpc.serializer.JdkSerializer;
 import com.kz.rpc.serializer.Serializer;
+import com.kz.rpc.serializer.SerializerFactory;
 import io.vertx.core.Handler;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerRequest;
@@ -12,6 +14,7 @@ import io.vertx.core.http.HttpServerResponse;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ServiceLoader;
 
 
 public class HttpServerHandler implements Handler<HttpServerRequest> {
@@ -19,8 +22,15 @@ public class HttpServerHandler implements Handler<HttpServerRequest> {
     @Override
     public void handle(HttpServerRequest httpServerRequest) {
         // 指定序列化器
-        final Serializer serializer = new JdkSerializer();
-
+        //final Serializer serializer = new JdkSerializer();
+//        ServiceLoader<Serializer> serviceLoader = ServiceLoader.load(Serializer.class);
+//        for (Serializer s : serviceLoader) {
+//            if (s instanceof JdkSerializer) {
+//                serializer = s;
+//                break;
+//            }
+//        }
+        Serializer serializer = SerializerFactory.getSerializer(RpcApplication.getRpcConfig().getSerializer());
         // 记录日志
         System.out.println("receive request" + httpServerRequest.method() + " " + httpServerRequest.uri());
 

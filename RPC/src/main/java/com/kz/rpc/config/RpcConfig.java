@@ -1,6 +1,8 @@
 package com.kz.rpc.config;
 
 
+import com.kz.rpc.serializer.Serializer;
+import com.kz.rpc.serializer.SerializerKeys;
 import lombok.Data;
 
 /**
@@ -28,5 +30,9 @@ public class RpcConfig {
      * 模拟调用
      */
     private boolean mock = false;
+    /**
+     * 序列化方式
+     */
+    private String serializer = SerializerKeys.JDK;
 
 }
