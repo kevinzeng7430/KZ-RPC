@@ -1,0 +1,4 @@
+com.kz.rpc.serializer.HessianSerializer
+com.kz.rpc.serializer.JdkSerializer
+com.kz.rpc.serializer.JsonSerializer
+com.kz.rpc.serializer.KryoSerializer
