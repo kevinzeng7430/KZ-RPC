@@ -1,7 +1,10 @@
 package com.kz.rpc;
 
+import com.kz.rpc.config.RegistryConfig;
 import com.kz.rpc.config.RpcConfig;
 import com.kz.rpc.constant.RpcConstant;
+import com.kz.rpc.registry.Registry;
+import com.kz.rpc.registry.RegistryFactory;
 import com.kz.rpc.utils.ConfigUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,6 +24,10 @@ public class RpcApplication {
     public static void init(RpcConfig newRpcConfig){
         rpcConfig = newRpcConfig;
         log.info("RPC框架初始化成功，当前配置为：{}", rpcConfig);
+        RegistryConfig registryConfig = rpcConfig.getRegistryConfig();
+        Registry registry = RegistryFactory.getInstance(registryConfig.getRegistry());
+        registry.init(registryConfig);
+        log.info("注册中心初始化成功，当前配置为：{}", registryConfig);
     }
     /**
      * 初始化
@@ -51,4 +58,9 @@ public class RpcApplication {
         }
         return rpcConfig;
     }
+    /**
+     * 框架初始化
+     * @param  newRegistry
+     * @return 配置项值
+     */
 }

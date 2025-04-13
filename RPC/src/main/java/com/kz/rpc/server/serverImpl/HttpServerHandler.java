@@ -1,9 +1,13 @@
 package com.kz.rpc.server.serverImpl;
 
+import cn.hutool.json.JSONObject;
 import com.kz.rpc.RpcApplication;
+import com.kz.rpc.config.RegistryConfig;
 import com.kz.rpc.model.RpcRequest;
 import com.kz.rpc.model.RpcResponse;
+import com.kz.rpc.registry.EtcdRegistry;
 import com.kz.rpc.registry.LocalRegistry;
+import com.kz.rpc.registry.Registry;
 import com.kz.rpc.serializer.JdkSerializer;
 import com.kz.rpc.serializer.Serializer;
 import com.kz.rpc.serializer.SerializerFactory;
@@ -64,7 +68,6 @@ public class HttpServerHandler implements Handler<HttpServerRequest> {
             } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException |
                      InstantiationException e) {
                 throw new RuntimeException(e);
-
             }
 
             //响应
