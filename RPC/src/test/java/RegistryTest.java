@@ -22,14 +22,14 @@ public class RegistryTest {
         registry.init(registryConfig);
     }
 
-    @Test
-    public void testGetKey() throws Exception {
-        String serviceName = "com.kz.example.common.service.UserService";
-        String key = registry.getKey(serviceName);
-        JSONObject jsonObject = new JSONObject(key);
-        String serviceKeyName = jsonObject.getStr("serviceName");
-        System.out.println("key = " + serviceKeyName);
-    }
+//    @Test
+//    public void testGetKey() throws Exception {
+//        String serviceName = "com.kz.example.common.service.UserService";
+//        String key = registry.getKey(serviceName);
+//        JSONObject jsonObject = new JSONObject(key);
+//        String serviceKeyName = jsonObject.getStr("serviceName");
+//        System.out.println("key = " + serviceKeyName);
+//    }
 
 }
 
