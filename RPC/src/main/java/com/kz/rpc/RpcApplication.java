@@ -28,6 +28,10 @@ public class RpcApplication {
         Registry registry = RegistryFactory.getInstance(registryConfig.getRegistry());
         registry.init(registryConfig);
         log.info("注册中心初始化成功，当前配置为：{}", registryConfig);
+
+        // 创建并注册 Shutdown Hook，JVM 退出时执行操作
+        Runtime.getRuntime().addShutdownHook(new Thread(registry::destroy));
+
     }
     /**
      * 初始化

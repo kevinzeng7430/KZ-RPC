@@ -10,10 +10,10 @@ import org.junit.Test;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import static org.junit.Assert.*;
 
 public class RegistryTest {
     final Registry registry = new EtcdRegistry();
+
 
     @Before
     public void init() {
@@ -22,16 +22,55 @@ public class RegistryTest {
         registry.init(registryConfig);
     }
 
-//    @Test
-//    public void testGetKey() throws Exception {
-//        String serviceName = "com.kz.example.common.service.UserService";
-//        String key = registry.getKey(serviceName);
-//        JSONObject jsonObject = new JSONObject(key);
-//        String serviceKeyName = jsonObject.getStr("serviceName");
-//        System.out.println("key = " + serviceKeyName);
-//    }
+    @Test
+    public void register() throws Exception {
+        ServiceMetaInfo serviceMetaInfo = new ServiceMetaInfo();
+        serviceMetaInfo.setServiceName("myService");
+        serviceMetaInfo.setServiceVersion("1.0");
+        serviceMetaInfo.setServiceHost("localhost");
+        serviceMetaInfo.setServicePort(1234);
+        registry.register(serviceMetaInfo);
+        serviceMetaInfo = new ServiceMetaInfo();
+        serviceMetaInfo.setServiceName("myService");
+        serviceMetaInfo.setServiceVersion("1.0");
+        serviceMetaInfo.setServiceHost("localhost");
+        serviceMetaInfo.setServicePort(1235);
+        registry.register(serviceMetaInfo);
+        serviceMetaInfo = new ServiceMetaInfo();
+        serviceMetaInfo.setServiceName("myService");
+        serviceMetaInfo.setServiceVersion("2.0");
+        serviceMetaInfo.setServiceHost("localhost");
+        serviceMetaInfo.setServicePort(1234);
+        registry.register(serviceMetaInfo);
+    }
+
+    @Test
+    public void unRegister() {
+        ServiceMetaInfo serviceMetaInfo = new ServiceMetaInfo();
+        serviceMetaInfo.setServiceName("myService");
+        serviceMetaInfo.setServiceVersion("1.0");
+        serviceMetaInfo.setServiceHost("localhost");
+        serviceMetaInfo.setServicePort(1234);
+        registry.unregister(serviceMetaInfo);
+    }
+
+    @Test
+    public void serviceDiscovery() throws Exception {
+        ServiceMetaInfo serviceMetaInfo = new ServiceMetaInfo();
+        serviceMetaInfo.setServiceName("myService");
+        serviceMetaInfo.setServiceVersion("1.0");
+        String serviceKey = serviceMetaInfo.getServiceKey();
+        List<ServiceMetaInfo> serviceMetaInfoList = registry.serviceDiscovery(serviceKey);
+        Assert.assertNotNull(serviceMetaInfoList);
+    }
+    @Test
+    public void heartBeat() throws Exception {
+
+        Thread.sleep(10000);
+    }
 
 }
+
 
 
 
