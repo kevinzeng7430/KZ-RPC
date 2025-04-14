@@ -3,7 +3,9 @@ package com.kz.rpc.registry;
 import com.kz.rpc.config.RegistryConfig;
 import com.kz.rpc.model.ServiceMetaInfo;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public interface Registry {
     /**
@@ -36,4 +38,14 @@ public interface Registry {
      * 销毁服务
      */
     void destroy();
+
+    /**
+     * 心跳检测
+     */
+    void heartBeat();
+
+    /**
+     * 监听
+     */
+    void watch(String serviceNodeKey);
 }
