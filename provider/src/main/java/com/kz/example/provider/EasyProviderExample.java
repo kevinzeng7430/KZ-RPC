@@ -11,6 +11,8 @@ import com.kz.rpc.registry.Registry;
 import com.kz.rpc.registry.RegistryFactory;
 import com.kz.rpc.server.HttpServer;
 import com.kz.rpc.server.serverImpl.VertxHttpServer;
+import com.kz.rpc.server.tcp.VertxTcpServer;
+
 
 public class EasyProviderExample {
     public static void main(String[] args) {
@@ -34,7 +36,8 @@ public class EasyProviderExample {
             throw new RuntimeException("注册服务失败", e);
         }
         // 启动web服务
-        HttpServer httpServer = new VertxHttpServer();
-        httpServer.doStart(8080);
+        VertxTcpServer tcpServer = new VertxTcpServer();
+        //HttpServer httpServer = new VertxHttpServer();
+        tcpServer.doStart(8080);
     }
 }
