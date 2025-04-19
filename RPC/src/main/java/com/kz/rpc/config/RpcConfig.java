@@ -1,6 +1,7 @@
 package com.kz.rpc.config;
 
 
+import com.kz.rpc.fault.RetryStrategyKeys;
 import com.kz.rpc.loadbalance.LoadBalanceKeys;
 import com.kz.rpc.serializer.Serializer;
 import com.kz.rpc.serializer.SerializerKeys;
@@ -43,4 +44,8 @@ public class RpcConfig {
      * 负载均衡器
      */
     private String loadBalance = LoadBalanceKeys.ROUND_ROBIN;
+    /**
+     * 重试策略
+     */
+    private String retryStrategy = RetryStrategyKeys.NO;
 }

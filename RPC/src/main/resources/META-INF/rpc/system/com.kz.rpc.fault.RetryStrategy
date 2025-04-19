@@ -1,0 +1,2 @@
+no=com.kz.rpc.fault.NoRetryStrategy
+fixedInterval=com.kz.rpc.fault.FixedIntervalRetryStrategy
