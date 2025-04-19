@@ -9,6 +9,8 @@ import com.kz.rpc.config.RpcConfig;
 import com.kz.rpc.constant.RpcConstant;
 import com.kz.rpc.fault.RetryStrategy;
 import com.kz.rpc.fault.RetryStrategyFactory;
+import com.kz.rpc.fault.tolerant.TolerantStrategy;
+import com.kz.rpc.fault.tolerant.TolerantStrategyFactory;
 import com.kz.rpc.loadbalance.LoadBalance;
 import com.kz.rpc.loadbalance.LoadBalanceFactory;
 import com.kz.rpc.model.RpcRequest;
@@ -69,10 +71,19 @@ public class ServiceProxy implements InvocationHandler {
             ServiceMetaInfo serviceMetaInfo1 = loadBalance.select(requestParams, serviceMetaInfoList);
            // ServiceMetaInfo selectServiceMetaInfo = serviceMetaInfoList.get(0);
             //RPC 请求，重试机制
-            RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
-            RpcResponse rpcResponse = retryStrategy.doRetry(() ->
-                    VertxTcpClient.doRequest(rpcRequest, serviceMetaInfo1)
-            );
+            RpcResponse rpcResponse;
+            try {
+                RetryStrategy retryStrategy = RetryStrategyFactory.getInstance(rpcConfig.getRetryStrategy());
+                rpcResponse = retryStrategy.doRetry(() ->
+                        VertxTcpClient.doRequest(rpcRequest, serviceMetaInfo1)
+                );
+            }catch (Exception e){
+                TolerantStrategy tolerantStrategy = TolerantStrategyFactory.getInstance(rpcConfig.getFaultTolerantStrategy());
+                // 容错策略
+                rpcResponse = tolerantStrategy.tolerant(null, e);
+                throw new RuntimeException("RPC请求失败", e);
+            }
+
             return rpcResponse.getData();
             /**
             // 发送请求
