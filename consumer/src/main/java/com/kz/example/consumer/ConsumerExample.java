@@ -2,6 +2,7 @@ package com.kz.example.consumer;
 
 import com.kz.example.common.model.User;
 import com.kz.example.common.service.UserService;
+import com.kz.rpc.bootstrap.ConsumerBootstrap;
 import com.kz.rpc.config.RpcConfig;
 import com.kz.rpc.proxy.ServiceProxyFactory;
 import com.kz.rpc.utils.ConfigUtils;
@@ -10,7 +11,7 @@ public class ConsumerExample {
     public static void main(String[] args) {
         RpcConfig rpcConfig = ConfigUtils.loadConfig(RpcConfig.class, "rpc");
         System.out.println(rpcConfig);
-
+        ConsumerBootstrap.init();
         // 获取代理
         UserService userService = ServiceProxyFactory.getProxy(UserService.class);
         User user = new User();
