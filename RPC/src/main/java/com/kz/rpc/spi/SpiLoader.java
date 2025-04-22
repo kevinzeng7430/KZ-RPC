@@ -85,6 +85,10 @@ public class SpiLoader {
         if (!instanceCache.containsKey(implClassName)) {
             try {
                 instanceCache.put(implClassName, implClass.getDeclaredConstructor().newInstance());
+                /**
+                 * getDeclaredConstructor() - 获取类的无参构造函数
+                 * newInstance() - 使用这个构造函数创建一个新的实例
+                 */
             } catch (InstantiationException | IllegalAccessException e) {
                 String errorMsg = String.format("%s 类实例化失败", implClassName);
                 throw new RuntimeException(errorMsg, e);
